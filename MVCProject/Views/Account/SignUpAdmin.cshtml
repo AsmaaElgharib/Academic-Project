@@ -1,0 +1,48 @@
+﻿@model MVCProject.ViewModel.RegisterVM
+
+@{
+    ViewData["Title"] = "SignUpAdmin";
+}
+
+<div class="container mt-3">
+    <h1>SignUp as an Admin</h1>
+    <hr />
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="SignUpAdmin">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="@ViewBag.ReturnUrl" />
+
+                <div class="form-group">
+                    <label for="Name" >Select User</label>
+                    <select name="Name" id="Name" class="form-select form-select-lg mb-3 ml-4">
+                        @foreach(var item in ViewBag.listOfUser)
+                        {
+                            <option value="@item" selected>@item</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="roleName" >Select Role</label>
+                    <select name="roleName" id="roleName" class="form-select form-select-lg mb-3 ml-4">
+                        @foreach(var item in ViewBag.listOfroles)
+                        {
+                            <option value="@item" selected>@item</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group mt-2">
+                    <input type="submit" value="Create" class="btn btn-primary me-3" style="border-radius: 50px;padding: 5px 20px;"/>
+                    <a asp-action="" class="btn btn-secondary p-1 pe-3 ps-3">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

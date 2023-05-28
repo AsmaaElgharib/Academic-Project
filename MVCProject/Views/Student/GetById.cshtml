@@ -1,0 +1,45 @@
+﻿@model Student
+
+
+<div class="container mt-3">
+    <h2>Show Student details</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td>@Model.Age</td>
+        </tr>
+        <tr>
+            <th>Track</th>
+            @foreach(var item in ViewBag.Trs)
+            {
+                if(item.Id == Model.Track_Id)
+                {
+                    <td>@item.Name</td>
+                }
+            }
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>@Model.Address</td>
+        </tr>
+        <tr>
+            <th>Phone Number</th>
+            <td>+20 @Model.PhoneNumber</td>
+        </tr>
+    </table>
+    @foreach(var item in ViewBag.IStdWithCr)
+    {
+        if(Model.Id == item.StId)
+        {
+            <a asp-action="GetStudent" asp-controller="Student" asp-route-id="@item.Id" class="btn btn-secondary">Result</a>
+        }
+    }
+    <a asp-action="GetAll" asp-controller="Student" class="btn btn-secondary">Back</a>
+    
+</div>
+ 
+

@@ -1,0 +1,43 @@
+﻿@model List<Student>
+<!--Strong Type View-->
+
+<div class="container mt-3">
+    <a asp-action="Create" asp-controller="Student" class="btn btn-primary mb-3">Add new Student</a>
+    <table class="table table-bordered text-center" width="50%">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Track</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Age</td>
+                <td>@item.Address</td>
+                @foreach(var i in ViewBag.Trs)
+                {
+                    if(i.Id == item.Track_Id)
+                    {
+                        <td>@i.Name</td>
+                    }
+                }
+                <td> <a asp-action="GetById" asp-controller="Student" asp-route-id="@item.Id" class="btn btn-info">Details</a></td>
+                <td> <a asp-action="Update" asp-controller="Student" asp-route-id="@item.Id" class="btn btn-warning">Edit</a></td>
+                <td><a class="btn btn-danger" asp-action="Delete" asp-controller="Student" asp-route-id="@item.Id" onclick="ConfirmDelete(event)">Delete</a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script>
+    function ConfirmDelete(){
+        var accept=confirm("Are You Sure?");
+        if(accept==false)
+            event.preventDefault();
+    }
+</script>
